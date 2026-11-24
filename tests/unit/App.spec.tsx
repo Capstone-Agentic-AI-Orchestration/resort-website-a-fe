@@ -14,6 +14,16 @@ describe('customer auth pages', () => {
     jest.restoreAllMocks();
   });
 
+  it('renders the default title', () => {
+    const markup = renderToString(<App />);
+    expect(markup).toContain('Welcome back');
+  });
+
+  it('renders a custom title', () => {
+    const markup = renderToString(<App title="Guest sign in" />);
+    expect(markup).toContain('Guest sign in');
+  });
+
   it('renders labeled login controls and navigation to signup', () => {
     const markup = renderToString(<App />);
     expect(markup).toContain('Welcome back');

@@ -28,7 +28,7 @@ export async function submitAuth(mode: AuthMode, email: string, password: string
   return response.json() as Promise<AuthResponse>;
 }
 
-export function App() {
+export function App({ title }: { title?: string } = {}) {
   const mode: AuthMode = window.location.pathname.replace(/\/$/, '') === '/signup' ? 'signup' : 'login';
   const isSignup = mode === 'signup';
   const [email, setEmail] = useState('');
@@ -56,7 +56,7 @@ export function App() {
     <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: '2rem', background: '#f4f7f4', color: '#18352d', fontFamily: 'system-ui, sans-serif' }}>
       <section aria-labelledby="auth-title" style={{ width: 'min(100%, 26rem)', padding: '2.5rem', borderRadius: '1rem', background: '#fff', boxShadow: '0 16px 50px #153d2b18' }}>
         <p style={{ margin: '0 0 .5rem', color: '#567565', letterSpacing: '.12em', textTransform: 'uppercase', fontSize: '.75rem' }}>Resort guest account</p>
-        <h1 id="auth-title" style={{ margin: '0 0 .5rem', fontSize: '2rem' }}>{isSignup ? 'Create your account' : 'Welcome back'}</h1>
+        <h1 id="auth-title" style={{ margin: '0 0 .5rem', fontSize: '2rem' }}>{title || (isSignup ? 'Create your account' : 'Welcome back')}</h1>
         <p style={{ margin: '0 0 1.75rem', color: '#52645d' }}>{isSignup ? 'Sign up to get started with your guest account.' : 'Log in to continue to your guest account.'}</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="email" style={{ display: 'block', marginBottom: '.4rem', fontWeight: 600 }}>Email address</label>
